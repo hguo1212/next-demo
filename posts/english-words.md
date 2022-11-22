@@ -1,6 +1,6 @@
 ---
 title: 'A list of unfamiliar words'
-date: '2022-11-15'
+date: '2022-11-22'
 ---
 ### 记录遇到的一些单词
 - Marketing pages
@@ -36,7 +36,7 @@ Client-side navigation means that the page transition happens using Javascript, 
 css modules are extracted from the Javascript bundles at build time and generate .css files that are load automatically by Next.js
 - illustrate 解释
 - hydration 水合（作用）
-When a page is loaded by the browswe, its JavaScript code runs and makes the page fully interactive.(This process is called hydration).
+When a page is loaded by the browser, its JavaScript code runs and makes the page fully interactive.(This process is called hydration).
 - so far 到目前为止
 So far, all the pages we've created do not require fetching external data.
 - individual 个人的
@@ -46,3 +46,9 @@ Here is some ensential information you should know about dynamic routes.
 - wrap up  完成
 Before we wrap up this lesson, let's talk about some tips for using API Routes on the next page.
 The DPS workflow: develop, preview, ship; 开发 预览 和发布
+- on demand 按需
+- downside 缺点
+- falls into the category of trivial 琐碎的范畴
+- passkey 万能钥匙；专用钥匙
+- authenticate 认证
+- widely supported 广泛的支持
