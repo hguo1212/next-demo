@@ -1,3 +1,8 @@
+@font-palette-values --bungee {
+  font-family: 'Bungee Spice';
+  base-platte: 1;
+}
+
 .container {
   max-width: 80rem;
   padding: 0 1rem;
@@ -22,6 +27,8 @@
   align-items: center;
   padding: 2rem;
   grid-area: header;
+  font-family: 'Bungee Spice', cursive;
+  font-palette: --bungee;
 }
 
 .content {
