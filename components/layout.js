@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import classNames from 'classnames';
 import utilStyles from '../styles/utils.module.css';
 import styles from './layout.module.css';
 
@@ -64,7 +65,7 @@ export default function Layout({ children, home }) {
           )}
         </header>
         <main className={styles.content}>{children}</main>
-        <aside className={styles.sidebar}>sidebar</aside>
+        <aside className={classNames(styles.sidebar, utilStyles.flexBox)}>sidebar</aside>
         {!home && (
           <footer className={styles.footer}>
             <Link href="/">← Back to home</Link>
