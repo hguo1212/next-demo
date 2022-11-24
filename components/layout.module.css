@@ -35,16 +35,20 @@
   padding: 2rem;
   grid-area: content;
   background-color: #F9F7F7;
+  color: #282A3A;
+  border-radius: .5rem;
 }
 
 .footer {
   padding: 2rem;
   grid-area: footer;
   background-color: #F9F7F7;
+  border-radius: .5rem;
 }
 
 .sidebar {
   background-color: #F9F7F7;
   padding: 2rem;
   grid-area: sidebar;
+  border-radius: .5rem;
 }

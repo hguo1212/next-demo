@@ -25,3 +25,21 @@ img {
   max-width: 100%;
   display: block;
 }
+
+time {
+  color: #65647C;
+  font-size: 16px;
+}
+
+title {
+  color: #735F32;
+  font-size:  20px;
+}
+
+pre {
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 0.5rem;
+}
