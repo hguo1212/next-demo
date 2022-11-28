@@ -29,13 +29,13 @@
   grid-area: header;
   font-family: 'Bungee Spice', cursive;
   font-palette: --bungee;
+  position: relative;
 }
 
 .content {
   padding: 2rem;
   grid-area: content;
   background-color: #F9F7F7;
-  color: #282A3A;
   border-radius: .5rem;
 }
 
@@ -51,4 +51,19 @@
   padding: 2rem;
   grid-area: sidebar;
   border-radius: .5rem;
+}
+
+.theme {
+  position: absolute;
+  right: 60px;
+  top: 60px;
+  cursor: pointer;
+}
+
+.flexBox {
+  display: flex;
+}
+
+.backIcon {
+  margin-right: 10px;
 }

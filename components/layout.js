@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,6 +10,23 @@ const name = 'Hannah';
 export const siteTitle = 'Next.js Sample Website';
 
 export default function Layout({ children, home }) {
+  const [theme, setTheme] =useState('light');
+
+  const themeIcon = () => <Image
+  priority
+  src={theme==="light" ? "/icons/sun.svg" :"/icons/moon.svg"}
+  className={styles.theme}
+  height={30}
+  width={30}
+  alt=""
+  onClick={()=>{
+    const isLight = theme==="light" ;
+    setTheme(isLight ? "dark" : "light");
+    document.body.classList.toggle("dark-theme")
+
+  }}
+/>
+
   return (
     <div className={styles.container}>
       <Head>
@@ -43,6 +61,7 @@ export default function Layout({ children, home }) {
                 alt=""
               />
               <h1 className={utilStyles.heading2Xl}>{name}</h1>
+              {themeIcon()}
             </>
           ) : (
             <>
@@ -61,6 +80,7 @@ export default function Layout({ children, home }) {
                   {name}
                 </Link>
               </h2>
+              {themeIcon()}
             </>
           )}
         </header>
@@ -68,7 +88,13 @@ export default function Layout({ children, home }) {
         <aside className={classNames(styles.sidebar, utilStyles.flexBox)}>sidebar</aside>
         {!home && (
           <footer className={styles.footer}>
-            <Link href="/">← Back to home</Link>
+            <Link href="/" className={styles.flexBox}>
+              <Image priority
+                src="/icons/left-arrow.svg"
+                className={styles.backIcon}
+                height={30}
+                width={30}
+                alt=""/> Back to home</Link>
             </footer>
         )}
     </div>
