@@ -1,0 +1,38 @@
+---
+title: "css-配色方案（color-scheme & prefers-color-scheme ）"
+date: '2022-11-28'
+---
+
+# css- 配色方案
+1. 页面使用配色方案可以使用css或者meta
+```css
+  :root {
+    color-scheme: light dark;
+  }
+```
+
+```html
+  <meta name="color-scheme" content="light dark">
+```
+
+2. 页面中的部分组件使用配色方案
+prefers-color-scheme媒体查询与color-scheme属性同步工作
+color-scheme： 告诉了浏览器某个元素支持什么配色方案
+prefers-color-scheme：可以告诉浏览器当某个主题处于活动状态时，我们希望如何设置这些元素的样式
+无论何时使用配色方案，确保配色方案属性和媒体首选项很好的工作和同步
+```css
+  form {
+    color-scheme: light dark;
+  }
+
+  @media (prefers-color-scheme:dark) {
+    form {
+      background-color:#333;
+      color: #ccc;
+    }
+  }
+```
+
+如果不使用首选配色方案而使用自定义切换器来从浅色主题切换到深色主题。可以将页面方案设置为活动主题，同时不使用首选配色方案媒体查询。
+
+
