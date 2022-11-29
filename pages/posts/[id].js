@@ -24,10 +24,10 @@ export default function Post({postData}) {
 
   return <Layout>
     <Head>
-      {/* <title>{postData.title}</title> */}
+      <title>{postData.title}</title>
     </Head>
-    <h1>{prop('title')(meta)}</h1>
-    <Date dateString={prop('date')(meta)}/>
+    <h1>{prop('title')(postData)}</h1>
+    <Date dateString={prop('date')(postData)}/>
     {Component ? <Component 
     components={{
       Planet: () => <span style={{color: 'tomato'}}>Pluto</span>
