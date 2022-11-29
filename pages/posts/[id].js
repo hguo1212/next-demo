@@ -1,16 +1,37 @@
+import {useEffect, useState} from 'react';
 import Head from "next/head";
+import {prop} from 'lodash/fp'
+import {run} from '@mdx-js/mdx'
+import * as runtime from 'react/jsx-runtime';
 import { getAllPostIds, getPostData } from "../../lib/post";
 import Layout from "../../components/layout";
 import Date from "../../components/date";
 
 export default function Post({postData}) {
+  const [Component, setComponent] = useState('');
+  const [meta, setMeta] = useState();
+
+  useEffect(()=>{
+    const getContent = async ()=> {
+    run(postData.code, runtime).then((res)=>{
+        console.log('res',res)
+        setMeta(res.meta)
+        setComponent(()=> res.default)
+      })
+    }
+    getContent();
+  },[postData])
+
   return <Layout>
     <Head>
-      <title>{postData.title}</title>
+      {/* <title>{postData.title}</title> */}
     </Head>
-    <h1>{postData.title}</h1>
-    <Date dateString={postData.date}/>
-    <div dangerouslySetInnerHTML={{__html: postData.contentHtml}}></div>
+    <h1>{prop('title')(meta)}</h1>
+    <Date dateString={prop('date')(meta)}/>
+    {Component ? <Component 
+    components={{
+      Planet: () => <span style={{color: 'tomato'}}>Pluto</span>
+      }}/> : null}
   </Layout>
 }
 
