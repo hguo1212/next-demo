@@ -55,3 +55,15 @@ published: true
     place-content: center;
   }
 ```
+
+``` jsx
+class App extends React.Component {
+  render() {
+    return (
+      <MyContext.Provider value={{something: 'something'}}>
+        <Toolbar />
+      </MyContext.Provider>
+    );
+  }
+}
+```
