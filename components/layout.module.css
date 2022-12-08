@@ -37,7 +37,21 @@
   grid-area: content;
   background-color: #F9F7F7;
   border-radius: .5rem;
+  position: relative;
 }
+
+.heart {
+  float: right;
+  cursor: pointer;
+}
+.heart:hover {
+  transform: scale(1.2);
+}
+
+.heart:active {
+  transform: scale(1.6);
+}
+
 
 .footer {
   padding: 2rem;

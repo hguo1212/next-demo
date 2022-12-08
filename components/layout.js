@@ -27,6 +27,15 @@ export default function Layout({ children, home }) {
   }}
 />
 
+const heartIcon = ()=> <Image
+                        priority
+                        src="/icons/heart.svg"
+                        className={styles.heart}
+                        height={30}
+                        width={30}
+                        alt=""
+                        />
+
   return (
     <div className={styles.container}>
       <Head>
@@ -84,7 +93,12 @@ export default function Layout({ children, home }) {
             </>
           )}
         </header>
-        <main className={styles.content}>{children}</main>
+        <main className={styles.content}>
+          <>
+          {heartIcon()}
+          {children}
+          </>
+        </main>
         <aside className={classNames(styles.sidebar, utilStyles.flexBox)}>sidebar</aside>
         {!home && (
           <footer className={styles.footer}>
