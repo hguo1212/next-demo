@@ -1,3 +1,7 @@
+export default function () {
+  return <div>users</div>
+}
+
 // import { useState } from "react";
 // import useSWR, { SWRConfig, useSWRConfig } from "swr";
 // import { prop, map, reject, eq, propEq } from "lodash/fp";
