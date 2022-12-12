@@ -1,0 +1,145 @@
+---
+title: 'State Hook 异步回调获取不到最新的值及解决方案'
+date: '2022-12-12'
+tag: ' react'
+published: true,
+---
+
+## 问题描述
+在异步函数中看到了陈旧的state值。
+```jsx
+setFiles([...files, { file: { ...newFile, fileType: ATTACHMENT }, type: CUSTOM }]);
+```
+其中的files是旧值。
+
+## 了解setState更新值的方式
+### 1、直接传入新值
+
+```jsx
+const [count, setCount] = useState(0);
+setCount(count + 1);
+```
+
+### 2、传入回调函数
+
+```jsx
+const [count, setCount] = useState(0);
+setCount((prevState)=> prevState + 1);
+```
+
+通常情况下 setState 直接使用上述第一种方式传参即可，但在一些特殊情况下第一种方式会出现异常；
+例如希望在异步回调或闭包中获取最新状态并设置状态，此时第一种方式获取的状态不是实时的，React 官方文档提到：组件内部的任何函数，包括事件处理函数和 Effect，都是从它被创建的那次渲染中被「看到」的，所以引用的值任然是旧的，最后导致 setState 出现异常：
+ 
+```jsx
+import React, { useState, useEffect } from 'react';
+
+const App = () => {
+  const [arr, setArr] = useState([0]);
+
+  useEffect(() => {
+    console.log(arr);
+  }, [arr]);
+
+  const handleClick = () => {
+    Promise.resolve().then(() => {
+      setArr([...arr, 1]); // 此时赋值前 arr 为：[0]
+    })
+      .then(() => {
+        setArr([...arr, 2]); // 此时赋值前 arr 为旧状态仍然为：[0]
+      });
+  }
+
+  return (
+    <>
+      <button onClick={handleClick}>change</button>
+    </>
+  );
+}
+
+export default App;
+```
+上面代码，App 组件实际也是个闭包函数，handleClick 里面引用着 arr，第一次 setArr 后 arr 的值确实更新了，我们也可以在下面截图中看到，但此次执行的 handleClick 事件处理函数作用域还是旧的，里面引用的 arr 仍然为旧的，导致第二次 setArr 后结果为 [0, 2]：
+## 三种解决方案
+### 1. 使用回调方式传参数 （推荐）
+```jsx
+const handleClick = () => {
+    Promise.resolve().then(() => {
+      setArr(prevState => [...prevState, 1]); // 这里也可以不改，使用第一中传参方式 setArr([...arr, 1]); 因为这里不需要获取最新状态
+    })
+      .then(() => {
+        setArr(prevState => [...prevState, 2]); // 这里必须改成回调函数传参方式，否则会读取旧状态，导致异常
+      });
+  }
+```
+
+### 2. 使用useReducer 
+使用 useReducer 仿造类组件中的 forceUpdate 实现组件强制渲染
+**注意：**此方案仅限于只有页面依赖该数据时适用，如果有类似 useEffect 等 hook 在监听该数据(示例中的 arr )时无法实时捕捉到变化
+
+```jsx
+import React, { useState, useReducer } from 'react';
+
+const App = () => {
+  const [arr, setArr] = useState([0]);
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
+
+  const handleClick = () => {
+    Promise.resolve().then(() => {
+      arr.push(1); // 如果这里也需要做一次渲染在改变状态后调用 forceUpdate() 即可
+    })
+      .then(() => {
+        arr.push(2);
+        forceUpdate();
+      });
+  }
+
+  return (
+    <>
+      <h1>{arr.toString()}</h1>
+      <button onClick={handleClick}>change</button>
+    </>
+  );
+}
+
+export default App;
+```
+
+### 3、使用ref
+利用 ref ，state 发生改变同时将值映射到 ref
+ref 的改变不会触发页面更新，但在异步中一定能拿到最新值，所以需要在页面上用就使用 state，在异步逻辑中用就使用 ref
+
+```jsx
+import React, { useState, useRef, useEffect } from 'react';
+
+const App = () => {
+  const [arr, setArr] = useState([0]);
+  let ref = useRef();
+  useEffect(() => {
+    ref.current = arr;
+    console.log(arr);
+  }, [arr]);
+
+  const handleClick = () => {
+    Promise.resolve().then(() => {
+      const now = [...ref.current, 1];
+      ref.current = now;
+      setArr(now);
+    })
+      .then(() => {
+        setArr([...ref.current, 2]);
+      });
+  }
+
+  return (
+    <>
+      <h1>{arr.toString()}</h1>
+      <button onClick={handleClick}>change</button>
+    </>
+  );
+}
+
+export default App;
+```
+
+官方文档：<a href="https://zh-hans.reactjs.org/docs/hooks-faq.html#why-am-i-seeing-stale-props-or-state-inside-my-function"> 为什么我会在我的函数中看到陈旧的 props 和 state ？</a>
+
