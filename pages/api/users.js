@@ -8,10 +8,9 @@ export default function get_Users(req, res) {
   console.log('method',method);
   switch (method) {
     case 'GET': 
-    // kitten.find({}).then((docs)=>{
-    //   res.status(200).json(docs)
-    // });
-    res.status(200).json([{name:'haha'}])
+    kitten.find({}).then((docs)=>{
+      res.status(200).json(docs)
+    });
     break;
     case 'POST':
         console.log('req',req)

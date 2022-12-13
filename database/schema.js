@@ -4,6 +4,6 @@ const kittySchema = new mongoose.Schema({
   name: 'string',
 })
 
-let kitten = mongoose.model('Kitten') || mongoose.model('Kitten', kittySchema);
+let kitten = mongoose.models?.Kitten || mongoose.model("Kitten", kittySchema)
 
 export default kitten;
