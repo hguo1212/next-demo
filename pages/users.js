@@ -76,14 +76,14 @@ export default function User({baseUrl, fallback }) {
 
 export async function getStaticProps() {
   const baseUrl = process.env.API_BASE_URL;
-  const res = await fetch(`${baseUrl}/api/users`);
-  const users = await res.json();
+  // const res = await fetch(`${baseUrl}/api/users`);
+  // const users = await res.json();
 
   return {
     props: {
       baseUrl,
       fallback: {
-        "/api/users": users,
+        "/api/users": [],
       },
     },
   };
