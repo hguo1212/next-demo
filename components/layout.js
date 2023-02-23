@@ -94,9 +94,9 @@ export default function Layout({ children, home, count }) {
           </>
         </main>
         <aside className={classNames(styles.sidebar, utilStyles.flexBox)}>
-          <Link href="/todo" className={styles.flexBox}>
+          {/* <Link href="/todo" className={styles.flexBox}>
             TODO LIST
-          </Link>
+          </Link> */}
         </aside>
         {!home && (
           <footer className={styles.footer}>
