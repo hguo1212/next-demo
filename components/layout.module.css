@@ -13,7 +13,7 @@
   display: grid;
   grid-template-areas: 
   "header header"
-  "sidebar content"
+  "content content"
   "footer footer"
    ; 
    grid-template-rows: 15rem 1fr 5rem;
@@ -63,12 +63,12 @@
   border-radius: .5rem;
 }
 
-.sidebar {
+/* .sidebar {
   background-color: #F9F7F7;
   padding: 2rem;
   grid-area: sidebar;
   border-radius: .5rem;
-}
+} */
 
 .theme {
   position: absolute;
