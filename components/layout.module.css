@@ -52,6 +52,9 @@
   transform: scale(1.6);
 }
 
+.heartText {
+  color: pink;
+}
 
 .footer {
   padding: 2rem;

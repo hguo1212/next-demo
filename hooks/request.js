@@ -20,6 +20,13 @@ const commonFetch = async (method, url, data, options) => {
     body: finalData,
   }
 
+  console.log('tempOptions',url,{
+    ...tempOptions,
+    headers: {
+      ...tempOptions.headers,
+    },
+  })
+
   const res = await fetch(url, {
     ...tempOptions,
     headers: {

@@ -9,7 +9,7 @@ import Date from "../../components/date";
 
 const components = {Planet: () => <span style={{color: 'tomato'}}>Pluto</span>};
 
-export default function Post({postData}) {
+export default function Post({postData, baseUrl}) {
   const [Component, setComponent] = useState('');
 
   useEffect(()=>{
@@ -21,7 +21,9 @@ export default function Post({postData}) {
     getContent();
   },[postData])
 
-  return <Layout>
+
+
+  return <Layout count={0} >
     <Head>
       <title>{postData.title}</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css"></link>   
@@ -36,9 +38,11 @@ export default function Post({postData}) {
 
 export async function getStaticProps({params}) {
   const postData = await getPostData(params.id);
+  const baseUrl = process.env.API_BASE_URL;
   return {
     props:{
       postData,
+      baseUrl,
     }
   }
 }
