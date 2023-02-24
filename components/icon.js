@@ -2,7 +2,7 @@ import Image from "next/image";
 import style from './icon.module.css';
 import classNames from "classnames";
 
-const Icon = ({ src, className, width = 30, height = 30, onClick }) => {
+const Icon = ({ src, className, width = 30, height = 30, onClick,...res }) => {
   return (
     <Image
       priority
@@ -12,6 +12,7 @@ const Icon = ({ src, className, width = 30, height = 30, onClick }) => {
       width={height}
       alt=""
       onClick={onClick}
+      {...res}
     />
   );
 };

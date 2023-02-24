@@ -1,0 +1,11 @@
+
+.anchor {
+  display: none;
+  right:0;
+  bottom:0;
+}
+
+.show {
+  display: inline-block;
+  position: absolute;
+}
