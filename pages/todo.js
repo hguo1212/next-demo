@@ -6,22 +6,18 @@ import Icon from "../components/icon";
 import Layout from "../components/layout";
 import style from "./todo.module.css";
 import { del, post, read } from "../hooks/request";
-import clientPromise from "../lib/mongodb";
 
-
-export default function TODO({ baseUrl }) {
+export default function TODO({}) {
   const [data, setData] = useState([]);
   const [inputVal, setInputVal] = useState("");
   const [totalPage, setTotalPage] = useState(0);
   const [params, setParams] = useState({ page: 1, size: 3 });
 
   useEffect(() => {
-    read(`${baseUrl}/api/todo`, params).then(
-      ({ content, total: _total, pageTotal }) => {
-        setData(content);
-        setTotalPage(pageTotal);
-      }
-    );
+    read("todo", params).then(({ content, total: _total, pageTotal }) => {
+      setData(content);
+      setTotalPage(pageTotal);
+    });
   }, [params]);
 
   return (
@@ -37,7 +33,7 @@ export default function TODO({ baseUrl }) {
             <Icon
               src="/icons/add.svg"
               onClick={() => {
-                post(`${baseUrl}/api/todo`, { name: inputVal }).then(() => {
+                post("todo", { name: inputVal }).then(() => {
                   setParams((pre) => ({ ...pre }));
                   setInputVal("");
                 });
@@ -49,15 +45,12 @@ export default function TODO({ baseUrl }) {
           return (
             <div className={style.item} key={prop("_id")(item)}>
               {item.name}
-              <Image
+              <Icon
                 priority
                 src="/icons/delete.svg"
                 className={style.deleteIcon}
-                height={30}
-                width={30}
-                alt=""
                 onClick={() => {
-                  del(`${baseUrl}/api/todo`, {
+                  del(`todo`, {
                     _id: prop("_id")(item),
                   }).then(() => {
                     setParams((pre) => ({ ...pre }));
@@ -93,19 +86,4 @@ export default function TODO({ baseUrl }) {
       </div>
     </Layout>
   );
-}
-
-export async function getServerSideProps() {
-  const baseUrl = process.env.API_BASE_URL;
-  try {
-    const client = await clientPromise;
-    const db = client.db("test");
-    const todo = await db.collection("kittens").find({}).limit(10).toArray();
-    return {
-      props: { data: JSON.parse(JSON.stringify(todo)), baseUrl },
-    };
-  } catch (e) {
-    console.error(e);
-  }
-  return { props: { data: [], baseUrl } };
 }

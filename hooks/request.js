@@ -1,6 +1,6 @@
 import qs from 'qs';
-import { any, forEach, prop, omit, isArray,isNil, omitBy } from 'lodash/fp';
-
+import { prop, omit} from 'lodash/fp';
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 const commonFetch = async (method, url, data, options) => {
   let finalData;
   let headers = {
@@ -20,14 +20,14 @@ const commonFetch = async (method, url, data, options) => {
     body: finalData,
   }
 
-  console.log('tempOptions',url,{
-    ...tempOptions,
-    headers: {
-      ...tempOptions.headers,
-    },
-  })
+  // console.log('tempOptions',url,{
+  //   ...tempOptions,
+  //   headers: {
+  //     ...tempOptions.headers,
+  //   },
+  // })
 
-  const res = await fetch(url, {
+  const res = await fetch(`${baseUrl}/api/${url}`, {
     ...tempOptions,
     headers: {
       ...tempOptions.headers,

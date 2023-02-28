@@ -9,7 +9,7 @@ import Date from "../../components/date";
 
 const components = {Planet: () => <span style={{color: 'tomato'}}>Pluto</span>};
 
-export default function Post({postData, baseUrl}) {
+export default function Post({postData}) {
   const [Component, setComponent] = useState('');
 
   useEffect(()=>{
@@ -38,11 +38,9 @@ export default function Post({postData, baseUrl}) {
 
 export async function getStaticProps({params}) {
   const postData = await getPostData(params.id);
-  const baseUrl = process.env.API_BASE_URL;
   return {
     props:{
       postData,
-      baseUrl,
     }
   }
 }

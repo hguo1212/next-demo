@@ -1,19 +1,27 @@
-import clientPromise from '../../lib/mongodb';
+import clientPromise from "../../lib/mongodb";
+import  { readAll ,update, deleteById,create} from '../../utils/api-utils';
 
 export default async (req, res) => {
+  const method = req.method;
+  const collection = 'statistical';
   try {
-      const client = await clientPromise;
-      const db = client.db("test");
-
-      const statistical = await db
-          .collection("statistical")
-          .find({})
-          .sort({ metacritic: -1 })
-          .limit(10)
-          .toArray();
-
-      res.json(statistical);
+    const client = await clientPromise;
+    const db = client.db("test");
+    switch (method) {
+      case "GET":
+        await readAll(db,res, req,collection)
+        break;
+      case "POST":
+        await create(db, res, req, collection);
+        break;
+      case "PUT":
+        await update(db,res ,req,collection);
+        break;
+      case "DELETE":
+        await deleteById(db, req, collection);
+        break;
+    }
   } catch (e) {
-      console.error(e);
+    console.error(e);
   }
 };
