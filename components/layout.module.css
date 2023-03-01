@@ -43,6 +43,13 @@
 .heart {
   float: right;
   cursor: pointer;
+  text-align: center;
+  font-size: 12px;
+}
+
+.heartIcon {
+  display: block;
+  margin: 0 auto;
 }
 .heart:hover {
   transform: scale(1.2);

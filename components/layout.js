@@ -5,11 +5,12 @@ import classNames from "classnames";
 import Icon from "./icon";
 import utilStyles from "../styles/utils.module.css";
 import styles from "./layout.module.css";
+import { debounce } from "lodash/fp";
 
 const name = "Hannah";
 export const siteTitle = "Next.js Sample Website";
 
-export default function Layout({ children, home, count }) {
+export default function Layout({ children, home, count, onHeartClick }) {
   const [theme, setTheme] = useState("light");
 
   const themeIcon = () => (
@@ -24,10 +25,10 @@ export default function Layout({ children, home, count }) {
     />
   );
 
-  const heartIcon = (count) => (
+  const heartIcon = ({ count, onClick }) => (
     <div className={styles.heart}>
-      <Icon src="/icons/heart.svg" />
-      <span className={styles.heartText}>{count}</span>
+      <Icon src="/icons/heart.svg" onClick={debounce(200, onClick)} className={styles.heartIcon}/>
+      <span className={styles.heartText}>{count > 999 ? '999+': count}</span>
     </div>
   );
 
@@ -89,15 +90,15 @@ export default function Layout({ children, home, count }) {
         </header>
         <main className={styles.content}>
           <>
-            {heartIcon(count)}
+            {onHeartClick && heartIcon({ count, onClick: onHeartClick })}
             {children}
           </>
         </main>
         {/* <aside className={classNames(styles.sidebar, utilStyles.flexBox)}> */}
-          {/* <Link href="/todo" className={styles.flexBox}>
+        {/* <Link href="/todo" className={styles.flexBox}>
             TODO LIST
           </Link> */}
-          
+
         {/* </aside> */}
         {!home && (
           <footer className={styles.footer}>

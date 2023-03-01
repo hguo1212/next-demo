@@ -1,48 +1,80 @@
-import {useEffect, useState} from 'react';
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Head from "next/head";
-import {prop} from 'lodash/fp'
-import {run} from '@mdx-js/mdx'
-import * as runtime from 'react/jsx-runtime';
+import { map, flow, isEmpty, prop, trim, split } from "lodash/fp";
+import { run } from "@mdx-js/mdx";
+import * as runtime from "react/jsx-runtime";
 import { getAllPostIds, getPostData } from "../../lib/post";
+import { read, put } from "../../hooks/request";
 import Layout from "../../components/layout";
 import Date from "../../components/date";
+import cls from './[id].module.css'
+const components = {
+  Planet: ({ children }) => <span style={{ color: "tomato" }}>{children}</span>,
+};
 
-const components = {Planet: () => <span style={{color: 'tomato'}}>Pluto</span>};
+export default function Post({ postData }) {
+  const [Component, setComponent] = useState("");
+  const [detail, setDetail] = useState();
+  const [flag, setFlag] = useState(false);
 
-export default function Post({postData}) {
-  const [Component, setComponent] = useState('');
-
-  useEffect(()=>{
-    const getContent = async ()=> {
-    run(postData.code, runtime).then((res)=>{
-        setComponent(()=> res.default)
-      })
-    }
+  useEffect(() => {
+    const getContent = async () => {
+      run(postData.code, runtime).then((res) => {
+        setComponent(() => res.default);
+      });
+    };
     getContent();
-  },[postData])
+  }, [postData, flag]);
 
+  useEffect(() => {
+    read(`statistical`, { title: postData.title }).then((res) => {
+      setDetail(res);
+    });
+  }, [postData.title, flag]);
 
+  const tags = useMemo(()=>{
+    return  flow(prop('tag'),split(','))(postData)
+  },[prop('tag')(postData)])
 
-  return <Layout count={0} >
-    <Head>
-      <title>{postData.title}</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css"></link>   
-    </Head>
-    <h1>{prop('title')(postData)}</h1>
-    <Date dateString={prop('date')(postData)}/>
-    <hr />
-    {Component ? <Component 
-    components={components}/> : null}
-  </Layout>
+  console.log("postData", postData);
+
+  const onHeartClick = useCallback(() => {
+    const { _id, count } = detail || {};
+    if (_id) {
+      console.log("点击爱心icon");
+      put("statistical", { id: _id, count: count + 1 }).then(() => {
+        setFlag((val) => !val);
+      });
+    }
+  }, [detail]);
+
+  return (
+    <Layout count={prop("count")(detail)} onHeartClick={onHeartClick}>
+      <Head>
+        <title>{postData.title}</title>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css"
+        ></link>
+      </Head>
+      <h1>{prop("title")(postData)}</h1>
+      <Date dateString={prop("date")(postData)} />
+      {!isEmpty(tags) && <div>
+        {map((tag)=> <span key="tag" className={cls.tag}>{tag}</span>)(tags)}
+        </div>}
+      <hr />
+      {Component ? <Component components={components} /> : null}
+    </Layout>
+  );
 }
 
-export async function getStaticProps({params}) {
+export async function getStaticProps({ params }) {
   const postData = await getPostData(params.id);
   return {
-    props:{
+    props: {
       postData,
-    }
-  }
+    },
+  };
 }
 
 export async function getStaticPaths() {

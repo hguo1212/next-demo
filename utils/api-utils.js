@@ -15,6 +15,12 @@ async function readAll(db, res, req, collection) {
   res.json({ content, total, pageTotal });
 }
 
+async function readOne(db, res, req, collection) {
+  const query = req.query;
+  const content = await db.collection(collection).findOne(query);
+  res.json(content);
+}
+
 async function deleteById(db, req, collection) {
   const query = req.query;
   const { _id } = query;
@@ -23,10 +29,10 @@ async function deleteById(db, req, collection) {
 
 async function update(db, res, req, collection) {
   const body = req.body;
-  const { id, name } = body;
+  const { id, ...updateContent } = body;
   const newData = await db
     .collection(collection)
-    .updateOne({ _id: new ObjectId(id) }, { $set: { name } });
+    .updateOne({ _id: new ObjectId(id) }, { $set: updateContent });
   res.json(newData);
 }
 
@@ -41,4 +47,4 @@ async function create(db, res, req, collection) {
   res.json(newData);
 }
 
-export { readAll, deleteById, update, create };
+export { readAll, deleteById, update, create, readOne };
