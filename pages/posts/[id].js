@@ -36,12 +36,9 @@ export default function Post({ postData }) {
     return  flow(prop('tag'),split(','))(postData)
   },[prop('tag')(postData)])
 
-  console.log("postData", postData);
-
   const onHeartClick = useCallback(() => {
     const { _id, count } = detail || {};
     if (_id) {
-      console.log("点击爱心icon");
       put("statistical", { id: _id, count: count + 1 }).then(() => {
         setFlag((val) => !val);
       });
