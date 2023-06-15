@@ -10,7 +10,7 @@ const useScroll = ({ containerRef }) => {
   const scroll = () => {
     const container = containerRef.current;
     let viewHight = container.offsetHeight; //可视区域高度
-    let scrollTop = container.scrollTop;
+    let scrollTop = container.scrollTop; // 元素顶部到视口可见内容顶部的像素数
     if (scrollTop > viewHight) {
       setRolled(true);
     } else {
@@ -28,7 +28,7 @@ const useScroll = ({ containerRef }) => {
         container.removeEventListener("scroll", throttleScroll);
       };
     }
-  }, [containerRef.current]);
+  }, [containerRef, throttleScroll]);
 
   const BackTop = useMemo(() => {
     const container = containerRef.current;

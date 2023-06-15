@@ -1,7 +1,7 @@
 import clientPromise from "../../lib/mongodb";
 import { readAll, update, deleteById, create } from "../../utils/api-utils";
 
-export default async (req, res) => {
+ async function todo (req, res){
   const method = req.method;
   const collection = "kittens";
   try {
@@ -18,10 +18,6 @@ export default async (req, res) => {
         await update(db, res, req, collection);
         break;
       case "DELETE":
-        const { _id } = query;
-        const xx = await db
-          .collection("kittens")
-          .deleteOne({ _id: new ObjectId(_id) });
         await deleteById(db, req, collection);
         break;
     }
@@ -29,3 +25,5 @@ export default async (req, res) => {
     console.error(e);
   }
 };
+
+export default todo;

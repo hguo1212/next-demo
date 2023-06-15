@@ -1,9 +1,8 @@
 import { isNil } from "lodash/fp";
-import { ObjectId } from "mongodb";
 import clientPromise from "../../lib/mongodb";
 import { update, deleteById, create } from "../../utils/api-utils";
 
-export default async (req, res) => {
+async function api(req, res){
   const method = req.method;
   const collection = "statistical";
   try {
@@ -34,3 +33,5 @@ export default async (req, res) => {
     console.error(e);
   }
 };
+
+export default api

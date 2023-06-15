@@ -34,7 +34,7 @@ export default function Post({ postData }) {
 
   const tags = useMemo(()=>{
     return  flow(prop('tag'),split(','))(postData)
-  },[prop('tag')(postData)])
+  },[postData])
 
   const onHeartClick = useCallback(() => {
     const { _id, count } = detail || {};
