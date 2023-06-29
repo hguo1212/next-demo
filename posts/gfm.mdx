@@ -1,10 +1,67 @@
 ---
 title: "GFM"
-date: '2022-11-23'
-tag: 'css'
+date: "2022-11-23"
+tag: "css"
+published: false
 ---
 
-# Hello <Planet />
+# Echart
+
+测试在 mdx 里使用 react 组件
+
+<br />
+引入 echart
+
+<Echart
+  width={800}
+  height={300}
+  option={{
+    tooltip: {
+      trigger: "item",
+      triggerOn: "mousemove",
+    },
+    series: [
+      {
+        type: "tree",
+        data: [
+          {
+            name: "flare",
+            children: [
+              { name: "AgglomerativeCluster", value: 3938 },
+              { name: "CommunityStructure", value: 3812 },
+              { name: "HierarchicalCluster", value: 6714 },
+              { name: "MergeEdge", value: 743 },
+            ],
+          },
+        ],
+        top: "1%",
+        left: "7%",
+        bottom: "1%",
+        right: "20%",
+        symbolSize: 7,
+        label: {
+          position: "left",
+          verticalAlign: "middle",
+          align: "right",
+          fontSize: 14,
+        },
+        leaves: {
+          label: {
+            position: "right",
+            verticalAlign: "middle",
+            align: "left",
+          },
+        },
+        emphasis: {
+          focus: "descendant",
+        },
+        expandAndCollapse: true,
+        animationDuration: 550,
+        animationDurationUpdate: 750,
+      },
+    ],
+  }}
+/>
 ## Autolink literals
 
 www.example.com, https://example.com, and contact@example.com.
@@ -21,38 +78,40 @@ A note[^1]
 
 ## Table
 
-| a | b  |  c |  d  |
-| - | :- | -: | :-: |
+| a   | b   |   c |  d  |
+| --- | :-- | --: | :-: |
 
-| Alpha | Bravo |
-| - | - |
-| 中文 | Charlie |
-| 👩‍❤️‍👩 | Delta |
+| Alpha | Bravo   |
+| ----- | ------- |
+| 中文  | Charlie |
+| 👩‍❤️‍👩    | Delta   |
 
-* This is the first list item.
-* Here's the second list item.
+- This is the first list item.
+- Here's the second list item.
 
-    > A blockquote would look great below the second list item.
+  > A blockquote would look great below the second list item.
 
-* And here's the third list item.
+- And here's the third list item.
 
 ## Image
 
 1. Open the file containing the Linux mascot.
 2. Marvel at its beauty.
 
-    ![Tux, the Linux mascot](/images/cat.jpg)
+   ![Tux, the Linux mascot](/images/cat.jpg)
 
 3. Close the file.
 
 ## Tasklist
 
-* [ ] to do
-* [ ] done
-* [x] remarkGfm
-* [ ] remarkFrontmatter
-The deployment of
+- [ ] to do
+- [ ] done
+- [x] remarkGfm
+- [ ] remarkFrontmatter
+      The deployment of
+
 ## TODO
-* [] learn mongodb
-* [] the deployment of mongodb
-* [] connect with next.js
+
+- [] learn mongodb
+- [] the deployment of mongodb
+- [] connect with next.js

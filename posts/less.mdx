@@ -1,0 +1,100 @@
+---
+title: "less 语法"
+date: "2022-11-28"
+tag: "less"
+published: true
+---
+
+less 的语法
+
+# 变量
+
+```less
+@primary: blue;
+.txt {
+  color: @primary;
+}
+```
+
+# Mixins 混合
+
+```less
+.border() {
+  border-top: dotted 1px black;
+}
+
+.title {
+  color: @txtColor;
+  .border();
+}
+```
+
+# Nesting 嵌套
+
+```less
+/* 嵌套 */
+.page {
+  .title {
+    background: @txtColor;
+    &::hover {
+      cursor: pointer;
+    }
+  }
+}
+```
+
+# Nested At-Rules and Bubbling
+
+```less
+.component {
+  width: 300px;
+  @media (min-width: 768px) {
+    width: 600px;
+    @media (min-resolation: 192dpi) {
+      background-image: url(/img/retina2x.png);
+    }
+  }
+  @media (min-width: 800px) {
+    width: 800px;
+  }
+}
+```
+
+# Function
+
+- Logical Functions
+  - if
+  - boolean
+- String Functions
+  - escape 对特殊字符进行转义， 对输入中的字符应用 url 编码
+  - e string escape 去掉引号
+  - % format
+  - replace
+- List Functions
+  - length
+
+## Logical Functions 逻辑函数
+
+if 根据一个条件返回两个值其中一个值
+
+- 条件是一个布尔值表达式
+- value1 条件为 true 返回
+- value2 条件为 not true 返回
+  exp:
+
+```less
+@some: foo;
+div {
+  margin: if((2>1), 0, 3px);
+  color: if((iscolor(@some)), @some, black);
+}
+```
+
+result:
+
+```css
+div {
+  margin: 3px;
+  color: black;
+}
+```

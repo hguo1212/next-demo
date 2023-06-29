@@ -5,6 +5,7 @@ import Image from "next/image";
 import Icon from "../components/icon";
 import Layout from "../components/layout";
 import style from "./todo.module.css";
+import EchartBox from "../components/echart-box";
 import { del, post, read } from "../hooks/request";
 
 export default function TODO({}) {
@@ -22,6 +23,7 @@ export default function TODO({}) {
 
   return (
     <Layout>
+      <EchartBox className={style.echart} />
       <article>
         <div className={style.marginLeft9}>
           <br />

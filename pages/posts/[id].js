@@ -7,9 +7,11 @@ import { getAllPostIds, getPostData } from "../../lib/post";
 import { read, put } from "../../hooks/request";
 import Layout from "../../components/layout";
 import Date from "../../components/date";
-import cls from './[id].module.css'
+import cls from "./[id].module.css";
+import Echart from "../../components/echart-box";
 const components = {
   Planet: ({ children }) => <span style={{ color: "tomato" }}>{children}</span>,
+  Echart: ({ children, ...res }) => <Echart {...res} />,
 };
 
 export default function Post({ postData }) {
@@ -32,9 +34,9 @@ export default function Post({ postData }) {
     });
   }, [postData.title, flag]);
 
-  const tags = useMemo(()=>{
-    return  flow(prop('tag'),split(','))(postData)
-  },[postData])
+  const tags = useMemo(() => {
+    return flow(prop("tag"), split(","))(postData);
+  }, [postData]);
 
   const onHeartClick = useCallback(() => {
     const { _id, count } = detail || {};
@@ -56,9 +58,15 @@ export default function Post({ postData }) {
       </Head>
       <h1>{prop("title")(postData)}</h1>
       <Date dateString={prop("date")(postData)} />
-      {!isEmpty(tags) && <div>
-        {map((tag)=> <span key="tag" className={cls.tag}>{tag}</span>)(tags)}
-        </div>}
+      {!isEmpty(tags) && (
+        <div>
+          {map((tag) => (
+            <span key="tag" className={cls.tag}>
+              {tag}
+            </span>
+          ))(tags)}
+        </div>
+      )}
       <hr />
       {Component ? <Component components={components} /> : null}
     </Layout>
