@@ -12,56 +12,8 @@ published: true
 <br />
 引入 echart
 
-<Echart
-  width={800}
-  height={300}
-  option={{
-    tooltip: {
-      trigger: "item",
-      triggerOn: "mousemove",
-    },
-    series: [
-      {
-        type: "tree",
-        data: [
-          {
-            name: "flare",
-            children: [
-              { name: "AgglomerativeCluster", value: 3938 },
-              { name: "CommunityStructure", value: 3812 },
-              { name: "HierarchicalCluster", value: 6714 },
-              { name: "MergeEdge", value: 743 },
-            ],
-          },
-        ],
-        top: "1%",
-        left: "7%",
-        bottom: "1%",
-        right: "20%",
-        symbolSize: 7,
-        label: {
-          position: "left",
-          verticalAlign: "middle",
-          align: "right",
-          fontSize: 14,
-        },
-        leaves: {
-          label: {
-            position: "right",
-            verticalAlign: "middle",
-            align: "left",
-          },
-        },
-        emphasis: {
-          focus: "descendant",
-        },
-        expandAndCollapse: true,
-        animationDuration: 550,
-        animationDurationUpdate: 750,
-      },
-    ],
-  }}
-/>
+{/* <Echart width={800} height={300} option={[]} /> */}
+
 ## Autolink literals
 
 www.example.com, https://example.com, and contact@example.com.
