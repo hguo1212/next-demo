@@ -7,11 +7,18 @@ import { getAllPostIds, getPostData } from "../../lib/post";
 import { read, put } from "../../hooks/request";
 import Layout from "../../components/layout";
 import Date from "../../components/date";
-import cls from "./[id].module.css";
 import Echart from "../../components/echart-box";
+import Envelope from "../../components/envelope";
+
+import cls from "./[id].module.css";
+
 const components = {
+  Code: ({ children }) => (
+    <span style={{ background: "#BDCDD6", color: "#27374D" }}>{children}</span>
+  ),
   Planet: ({ children }) => <span style={{ color: "tomato" }}>{children}</span>,
   Echart: ({ children, ...res }) => <Echart {...res} />,
+  Envelope: ({ ...res }) => <Envelope {...res} />,
 };
 
 export default function Post({ postData }) {
