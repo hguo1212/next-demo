@@ -1,33 +1,33 @@
 :root {
   --primary-color: #888;
-  --secondary-color: #F0F0F0;
-  --bg-color: #FFE8DF;
-  --content-gb: #FFF;
+  --secondary-color: #f0f0f0;
+  --bg-color: #ffe8df;
+  --content-gb: #fff;
 }
 
 .dark-theme {
-  --primary-color: #DDD;
+  --primary-color: #ddd;
   --secondary-color: #222831;
-  --bg-color: #423F3E;
+  --bg-color: #423f3e;
 }
 
 .light {
   --primary-color: #888;
-  --secondary-color: #F0F0F0;
-  --bg-color: #FFE8DF;
-  --content-gb: #FFF;
+  --secondary-color: #f0f0f0;
+  --bg-color: #ffe8df;
+  --content-gb: #fff;
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   line-height: 1.6;
   font-size: 18px;
   background-color: var(--bg-color);
-  color: #555
+  color: #555;
 }
 
 * {
@@ -49,16 +49,21 @@ img {
 }
 
 time {
-  color: #65647C;
+  color: #65647c;
   font-size: 16px;
 }
 
 title {
-  color: #735F32;
-  font-size:  20px;
+  color: #735f32;
+  font-size: 20px;
 }
 
 pre {
   font-size: 14px;
   border-radius: 0.5rem;
+}
+
+p {
+  margin-block-end: 0;
+  margin-block-start: 0;
 }

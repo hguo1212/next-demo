@@ -19,6 +19,14 @@ const components = {
   Planet: ({ children }) => <span style={{ color: "tomato" }}>{children}</span>,
   Echart: ({ children, ...res }) => <Echart {...res} />,
   Envelope: ({ ...res }) => <Envelope {...res} />,
+  Paragraph: ({ children, ...res }) => (
+    <div {...res} style={{ color: "#626469", marginBottom: 10 }}>
+      {children}
+    </div>
+  ),
+  Strong: ({ children }) => (
+    <span style={{ color: "#f03744" }}>{children}</span>
+  ),
 };
 
 export default function Post({ postData }) {
