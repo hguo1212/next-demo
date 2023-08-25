@@ -18,8 +18,6 @@ const Letter = ({ className, style, children }) => (
 
 const Envelope = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log("current");
-  console.log("");
   return (
     <div
       className={cls.wrapper}
