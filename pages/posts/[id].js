@@ -9,6 +9,7 @@ import Layout from "../../components/layout";
 import Date from "../../components/date";
 import Echart from "../../components/echart-box";
 import Envelope from "../../components/envelope";
+import FoldedPicture from "../../components/folded-picture";
 
 import cls from "./[id].module.css";
 
@@ -27,6 +28,7 @@ const components = {
   Strong: ({ children }) => (
     <span style={{ color: "#f03744" }}>{children}</span>
   ),
+  FoldedPicture: ({ children, ...res }) => <FoldedPicture {...res} />,
 };
 
 export default function Post({ postData }) {
