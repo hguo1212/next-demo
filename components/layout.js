@@ -1,16 +1,22 @@
 import { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import classNames from "classnames";
+import { debounce } from "lodash/fp";
 import Icon from "./icon";
 import utilStyles from "../styles/utils.module.css";
 import styles from "./layout.module.css";
-import { debounce } from "lodash/fp";
+import classNames from "classnames";
 
 const name = "Hannah";
 export const siteTitle = "Next.js Sample Website";
 
-export default function Layout({ children, home, count, onHeartClick }) {
+export default function Layout({
+  children,
+  count,
+  onHeartClick,
+  home,
+  className,
+}) {
   const [theme, setTheme] = useState("light");
 
   const themeIcon = () => (
@@ -27,8 +33,12 @@ export default function Layout({ children, home, count, onHeartClick }) {
 
   const heartIcon = ({ count, onClick }) => (
     <div className={styles.heart}>
-      <Icon src="/icons/heart.svg" onClick={debounce(200, onClick)} className={styles.heartIcon}/>
-      <span className={styles.heartText}>{count > 999 ? '999+': count}</span>
+      <Icon
+        src="/icons/heart.svg"
+        onClick={debounce(200, onClick)}
+        className={styles.heartIcon}
+      />
+      <span className={styles.heartText}>{count > 999 ? "999+" : count}</span>
     </div>
   );
 
@@ -88,18 +98,12 @@ export default function Layout({ children, home, count, onHeartClick }) {
             </>
           )}
         </header>
-        <main className={styles.content}>
+        <main className={classNames(styles.content, className)}>
           <>
             {onHeartClick && heartIcon({ count, onClick: onHeartClick })}
             {children}
           </>
         </main>
-        {/* <aside className={classNames(styles.sidebar, utilStyles.flexBox)}> */}
-        {/* <Link href="/todo" className={styles.flexBox}>
-            TODO LIST
-          </Link> */}
-
-        {/* </aside> */}
         {!home && (
           <footer className={styles.footer}>
             <Link href="/" className={styles.flexBox}>

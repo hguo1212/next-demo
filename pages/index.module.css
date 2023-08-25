@@ -1,0 +1,43 @@
+.layout {
+  background-color: var(--bg-color);
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  height: auto;
+  min-height: 500px;
+}
+
+.flex {
+  display: flex;
+  column-gap: 20px;
+}
+
+.count {
+  color: #ffdbaa;
+  font-size: 16px;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.highlight {
+  border-bottom: 2px solid lightcyan;
+}
+
+.content,
+.sidebar {
+  background-color: #f9f7f7;
+  grid-area: sidebar;
+  border-radius: 0.5rem;
+  position: relative;
+  padding: 2rem;
+}
+
+.content {
+  flex: 1;
+}
+
+.sidebar > div {
+  cursor: pointer;
+}
