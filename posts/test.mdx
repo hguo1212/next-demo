@@ -1,0 +1,108 @@
+---
+title: "测试学习记录"
+date: "2024-08-05"
+tag: "前端测试"
+published: false
+---
+
+- Jest：一个广泛使用的 JavaScript 测试框架，提供了测试运行器和断言库，可以与 React 一起使用来执行单元测试。
+- React Testing Library：一个用于测试 React 组件的库，它提供了一套简洁的 API 来模拟渲染组件、触发事件和查询 DOM 元素，鼓励更加关注组件使用的方式而不是细节实现。
+- jest-dom：一个专门为 Jest 提供额外 DOM 元素断言的库，例如，检查元素是否可见、含有特定文本等。React Testing Library 推荐与 jest-dom 一起使用，以增强对 DOM 元素的断言能力。
+- @testing-library/user-event ，React Testing Library 附带了一个扩展的用户事件库，它建立在 fireEvent API 之上
+
+# Jest
+
+## 1 匹配器
+
+### 常用匹配器
+
+toBe 比较值，对象比较引用地址
+toEquals 比较对象的值，递归比较值
+not 反向匹配
+
+### 真值
+
+toBeNull
+toBeUndefined
+toBeDefined
+toBeThuthy
+toBeFalsy
+
+### 数字
+
+大于 小于 大于等于 小于等于
+toBeCloseTo 用于浮点数，以及处理浮点精度问题导致的比较误差
+使用场景：
+
+- 浮点数运算
+- 科学计算
+- 财务计算
+
+```javascript
+test("adds 0.1 + 0.2 to be close to 0.3 within two decimal places", () => {
+  expect(add(0.1, 0.2)).toBeCloseTo(0.3, 2);
+});
+// 可以指定精度，此处是小数点后两位
+```
+
+### 字符串
+
+toMatch
+检查匹配的正则字符串
+
+数组和可迭代对象(Set 等)
+
+```javascript
+test("shoppingList 数组中包含 milk", () => {
+  expect(shoppingList).toContain("milk");
+  expect(new Set(shoppingList)).toContain("milk");
+});
+```
+
+### 匹配异常
+
+toThrow() 可以是字符串或者正则
+
+## 2 测试异步代码
+
+Promise
+Async Await resolves rejects
+
+except.assertions(1); 断言次数为 1；
+
+callbacks
+在 callback 里使用 except 断言来验证返回的数据是否正确。并且需要在 callback 最后调用 done。才能保证执行完 callback。done(error) done 函数可以传递一个错误
+
+测试运行之前和之后执行的准备和清理步骤
+beforeEach 每个测试用例前都调用一次
+afterEach
+beforeAll 在所有的测试用例执行前调用一次
+afterAll
+
+准备和清理函数的作用域及执行顺序：如果在顶层执行，就是每个测试用例都会调用一次。如果在测试套件 describe 里, 就只有 describe 里的测试用例调用。并且顶层的准备函数先于测试套件里的准备函数。
+
+test.only 只执行当前测试用例
+
+模拟函数（mock functions）
+jest.fn() 用于生成模拟函数
+
+1. 用于检查函数是否被调用，检查调用次数和参数
+2. 替换实际函数以及隔离测试的环境
+3. 提供自定义的实现及控制测试行为
+   mock 属性，保存了关于次函数如何被调用，调用时的返回值的信息
+   mock 函数可以在测试期间将测试值植入代码，及设置返回值
+   filterTestFn.mockReturnValueOnce(true).mockReturnValueOnce(false);
+
+## 3 快照测试
+
+更新组件或者更新测试用例都需要，更新快照 --updateSnapshot 或者 -u
+普通快照与内联快照的区别是什么？分别在什么场景下使用？
+普通快照：
+
+- 适用于输出内容较大或复杂的情况
+- 快照存储在独立文件中，保持测试文件简洁
+- 更易于版本控制和审查
+  内联快照：
+- 适用于输出内容较小的情况
+- 快照嵌入测试代码中，便于快速查看和修改
+- 保持所有相关文件在一个文件中，方便维护
