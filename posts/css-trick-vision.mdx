@@ -1,0 +1,144 @@
+---
+title: "css trick vision"
+date: "2025-06-26"
+tag: "css"
+published: true
+description: "一些css代码片段"
+---
+
+# 视觉样式技巧
+
+1. 自定义滚动条
+   ::-webkit-scrollbar CSS 伪类元素会影响设置了 overflow:scroll; 的元素的滚动条样式
+
+```css
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+```
+
+<FlexCenter>
+  <CustomScrollbar />
+</FlexCenter>
+
+2. 纯 css 渐变边框
+   - background-clip 设置元素的背景（背景图片或颜色）是否延伸到边框、内边距盒子、内容盒子下面
+   - background-origin 规定了指定背景图片 background-image 属性的原点位置的背景相对区域
+
+```css
+.pure-css-gradient-border {
+  border: 4px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(#fff, #fff), linear-gradient(to right, #f06, #4a90e2);
+}
+```
+
+<PureCssGradientBorder />
+
+3. 毛玻璃
+
+```css
+.blur-bg {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+}
+```
+
+<Glass />
+
+4. 渐变字体
+
+```css
+.gradient-text {
+  background: linear-gradient(to right, #f06, #4a90e2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+```
+
+<GradientText>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem
+  ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum
+  dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+</GradientText>
+
+5. 图片变灰滤镜
+
+```css
+img.gray {
+  filter: grayscale(100%);
+}
+```
+
+<ImageGrayFilter />
+
+6. 自定义光标
+
+```css
+.custom-cursor {
+  cursor: url(cursor.png), auto;
+}
+```
+
+fixme:为什么图片没有生效
+
+<CustomCursor>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem
+  ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum
+  dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+</CustomCursor>
+
+7. 图标 hover 动画
+
+```css
+.icon:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s ease-in;
+}
+```
+
+<IconHoverAnimation />
+
+8. 半透明遮罩层
+
+```css
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+```
+
+<OverLay>半透明遮罩</OverLay>
+
+9. 设置图片圆角
+
+```css
+.avatar {
+  border-radius: 50%;
+}
+```
+
+10. 投影增强立体感
+
+```css
+.shadow-box {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+```
+
+11. 自定义文本选择颜色
+
+```css
+::selection {
+  background: #ffb7b7;
+  color: #000;
+}
+```
+
+<TextSelection> 选中我试试 选中我试试 选中我试试</TextSelection>

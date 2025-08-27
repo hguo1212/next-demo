@@ -10,8 +10,25 @@ import Date from "../../components/date";
 import Echart from "../../components/echart-box";
 import Envelope from "../../components/envelope";
 import FoldedPicture from "../../components/folded-picture";
+import {
+  CustomScrollbar,
+  PureCssGradientBorder,
+  Glass,
+  GradientText,
+  ImageGrayFilter,
+  CustomCursor,
+  IconHoverAnimation,
+  OverLay,
+  TextSelection,
+} from "../../components/css-trick-vision";
 
 import cls from "./[id].module.css";
+import {
+  Grid,
+  AdjustFontSize,
+  AdjustImage,
+  FlexCenter,
+} from "../../components/grid";
 
 const components = {
   Code: ({ children }) => (
@@ -29,6 +46,19 @@ const components = {
     <span style={{ color: "#f03744" }}>{children}</span>
   ),
   FoldedPicture: ({ children, ...res }) => <FoldedPicture {...res} />,
+  Grid,
+  AdjustFontSize,
+  AdjustImage,
+  CustomScrollbar,
+  PureCssGradientBorder,
+  FlexCenter,
+  Glass,
+  GradientText,
+  ImageGrayFilter,
+  CustomCursor,
+  IconHoverAnimation,
+  OverLay,
+  TextSelection,
 };
 
 export default function Post({ postData }) {

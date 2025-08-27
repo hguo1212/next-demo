@@ -3,12 +3,14 @@
   --secondary-color: #f0f0f0;
   --bg-color: #ffe8df;
   --content-gb: #fff;
+  --primary-blue: #0070f3;
 }
 
 .dark-theme {
   --primary-color: #ddd;
   --secondary-color: #222831;
   --bg-color: #423f3e;
+  --primary-blue: #0070f3;
 }
 
 .light {
@@ -16,6 +18,7 @@
   --secondary-color: #f0f0f0;
   --bg-color: #ffe8df;
   --content-gb: #fff;
+  --primary-blue: #0070f3;
 }
 
 html,

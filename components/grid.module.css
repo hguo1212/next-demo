@@ -1,0 +1,27 @@
+.gird-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.grid-auto-item {
+  background-color: var(--primary-blue);
+  padding: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  color: #fff;
+}
+
+/* 布局自适应缩放字体 */
+/* 14px ~ 18px 之间，2vw 是 14px ~ 18px 之间的值 */
+.text-adjust {
+  background-color: var(--primary-blue);
+  color: #fff;
+  font-size: clamp(14px, 2vw, 18px);
+}
+
+/* 内容自适应图片 */
+.img {
+  max-width: 100%;
+  height: auto;
+}

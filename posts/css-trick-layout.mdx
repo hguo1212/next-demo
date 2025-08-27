@@ -1,0 +1,235 @@
+---
+title: "css trick layout"
+date: "2025-06-25"
+tag: "css"
+published: true
+description: "一些css代码片段"
+---
+
+# 布局相关的样式
+
+1. 居中一个元素 （水平+垂直）
+
+```css
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+```
+
+2. 响应式宽度限制
+
+```css
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+```
+
+3. css grid 快速布局三列
+
+```css
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+```
+
+4. flex 快速平分布局
+
+```css
+.flex-split {
+  display: flex;
+}
+.flex-split > div {
+  flex: 1;
+}
+```
+
+5. sticky 固定导航栏
+
+```css
+.nav {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+}
+```
+
+6. 双栏固定+自定义布局
+
+```css
+.layout {
+  display: grid;
+  grid-template-columns: 200px auto;
+}
+```
+
+7. 圣杯布局
+
+```css
+body {
+  display: flex;
+}
+
+.left,
+.right {
+  width: 200px;
+}
+.center {
+  flex: 1;
+}
+```
+
+8. 内容高度占满剩余空间
+
+```css
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+```
+
+9. 媒体查询适配移动端
+
+```css
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+```
+
+10. 强制换行
+
+```css
+.break-word {
+  word-break: break-all;
+}
+```
+
+11. 固定宽高比容器（比如 16:9）
+
+```css
+.ratio {
+  position: relative;
+  margin-top: 56.25%;
+  background-color: red;
+}
+.ratio > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+```
+
+12. 单行文本省略号
+
+```css
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+```
+
+13. 多行文本省略号
+
+```css
+.multi-line-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+```
+
+14. 子元素自动换行
+
+```css
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+```
+
+15. 等高图片布局
+
+```css
+.card-group {
+  display: flex;
+}
+
+.card-group .card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+```
+
+16. 垂直居中 （非 Flex）
+
+```css
+.parent {
+  position: relative;
+}
+
+.child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+```
+
+17. 布局自适应缩放字体 14px ~ 18px 之间，2vw 是 14px ~ 18px 之间的值
+
+```css
+html {
+  font-size: clamp(14px, 2vw, 18px);
+}
+```
+
+<AdjustFontSize />
+
+18. flex 布局实现间距分布
+
+```css
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}
+```
+
+19. 内容自适应图片
+
+```css
+img {
+  max-width: 100%;
+  height: auto;
+}
+```
+
+<AdjustImage src="/images/5.jpg" />
+
+20. grid 网格自动填充列
+
+```css
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+```
+
+<Grid />

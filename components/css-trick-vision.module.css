@@ -1,0 +1,46 @@
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f0f0f0;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.pure-css-gradient-border {
+  border: 4px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(#fff, #fff),
+    linear-gradient(to right, #f06, #4a90e2);
+}
+
+.glass {
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #f06, #4a90e2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.custom-cursor {
+  cursor: url("/images/double.png"), auto;
+}
+
+.icon-hover-animation:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s ease-in;
+  cursor: pointer;
+}
+
+.text-selection::selection {
+  background: #ffb7b7;
+  color: #000;
+}
